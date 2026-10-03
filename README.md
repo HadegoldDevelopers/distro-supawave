@@ -64,9 +64,31 @@ Distro Supawave is a **fully self-contained application**. It runs entirely on y
 ---
 
 ## 📸 Screenshots
-> Add your screenshots here — drop image files into the `screenshots/` folder and reference them, e.g.:
 
-![Admin Dashboard](screenshots/dashboard.png)
+### Homepage
+![Homepage](screenshots/homepage.png)
+
+### Admin
+![Admin Dashboard](screenshots/admin_dashboard.png)
+![Admin Releases](screenshots/admin_releaes.png)
+![Admin Royalties](screenshots/admin_royalties.png)
+
+### Artist
+![Artist Dashboard](screenshots/artist_dashboard.png)
+![Artist Upload](screenshots/artist_upload_releases.png)
+![Artist Releases](screenshots/artist_releases.png)
+![Artist Analytics](screenshots/artist_analytics.png)
+![Artist Royalties](screenshots/artist_royalties.png)
+![Artist Subscription](screenshots/artist_subscription.png)
+
+### Label
+![Label Dashboard](screenshots/label_dashboard.png)
+![Label Artists](screenshots/label_artist.png)
+
+### More
+![Withdrawals](screenshots/withdrawal.png)
+![Register](screenshots/Register.png)
+![Login](screenshots/login.png)
 
 ---
 
