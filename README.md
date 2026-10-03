@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎵 Distro Supawave
+#  Music Distribution Platform - PHP Laravel (Distro Supawave)
 
 **White-Label Music Distribution Platform for Artists & Label (SaaS)s**
 
