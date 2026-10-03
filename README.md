@@ -70,7 +70,7 @@ Distro Supawave is a **fully self-contained application**. It runs entirely on y
 
 ### Admin
 ![Admin Dashboard](screenshots/admin_dashboard.png)
-![Admin Releases](screenshots/admin_releaes.png)
+![Admin Releases](screenshots/admin_releases.png)
 ![Admin Royalties](screenshots/admin_royalties.png)
 
 ### Artist
