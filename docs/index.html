@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distro Supawave Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            font-size: 14px;
+            color: #334155;
+            background: #f8fafc;
+            line-height: 1.7;
+        }
+
+        /* Layout */
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #1e1b4b;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 24px 0;
+            flex-shrink: 0;
+        }
+
+        .main {
+            margin-left: 260px;
+            padding: 40px 48px;
+            max-width: 960px;
+        }
+
+        /* Sidebar */
+        .sidebar-logo {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #312e81;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-logo h1 {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .sidebar-logo p {
+            color: #a5b4fc;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .sidebar-section {
+            padding: 8px 20px 4px;
+            color: #818cf8;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            color: #c7d2fe;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #312e81;
+            color: white;
+        }
+
+        .sidebar a i {
+            width: 16px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* Content */
+        .section {
+            margin-bottom: 56px;
+        }
+
+        .section:first-child {
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 22px;
+            color: #1e1b4b;
+            font-weight: 700;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 i {
+            color: #6366f1;
+        }
+
+        h3 {
+            font-size: 16px;
+            color: #1e1b4b;
+            font-weight: 600;
+            margin: 24px 0 10px;
+        }
+
+        p {
+            margin-bottom: 14px;
+            color: #475569;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+            margin-bottom: 14px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        a {
+            color: #6366f1;
+        }
+
+        /* Components */
+        .alert {
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 16px 0;
+            font-size: 13px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .alert i {
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .alert-info {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .alert-danger {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        code {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #6366f1;
+        }
+
+        pre {
+            background: #1e1b4b;
+            color: #e2e8f0;
+            padding: 18px 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 14px 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: #e2e8f0;
+            font-size: 13px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        th {
+            background: #6366f1;
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        .step-list {
+            counter-reset: steps;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            counter-increment: steps;
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .step-list li::before {
+            content: counter(steps);
+            background: #6366f1;
+            color: white;
+            min-width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-content strong {
+            display: block;
+            color: #1e1b4b;
+            margin-bottom: 4px;
+        }
+
+        .requirement-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .req-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .req-card h4 {
+            font-size: 13px;
+            color: #6366f1;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .req-card ul {
+            padding-left: 16px;
+            margin: 0;
+        }
+
+        .req-card li {
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-purple {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .badge-green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-orange {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+
+        .badge-red {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-pink {
+            background: #fce7f3;
+            color: #9d174d;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .credential-box {
+            background: #1e1b4b;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+
+        .credential-box h4 {
+            color: #a5b4fc;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .credential-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .credential-label {
+            color: #818cf8;
+            font-size: 12px;
+            width: 70px;
+        }
+
+        .credential-value {
+            color: white;
+            font-family: monospace;
+            font-size: 13px;
+            background: #312e81;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .page-hero h1 {
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .page-hero p {
+            color: #c7d2fe;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .page-hero .meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .page-hero .meta span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #e0e7ff;
+        }
+
+        .toc {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            font-size: 14px;
+            color: #6366f1;
+            margin: 0 0 12px;
+        }
+
+        .toc ol {
+            margin: 0;
+            padding-left: 18px;
+            columns: 2;
+            gap: 20px;
+        }
+
+        .toc li {
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .toc a {
+            color: #475569;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            color: #6366f1;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 24px 20px;
+            }
+
+            .requirement-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toc ol {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <h1><i class="fa-solid fa-music"></i> Distro Supawave</h1>
+                <p>Documentation v1.1.0</p>
+            </div>
+            <div class="sidebar-section">Getting Started</div>
+            <a href="#introduction"><i class="fa-solid fa-house"></i> Introduction</a>
+            <a href="#requirements"><i class="fa-solid fa-list-check"></i> Requirements</a>
+            <a href="#installation"><i class="fa-solid fa-download"></i> Installation</a>
+            <a href="#configuration"><i class="fa-solid fa-gear"></i> Configuration</a>
+
+            <div class="sidebar-section">Features</div>
+            <a href="#roles"><i class="fa-solid fa-users"></i> User Roles</a>
+            <a href="#releases"><i class="fa-solid fa-compact-disc"></i> Release Upload</a>
+            <a href="#admin-releases"><i class="fa-solid fa-screwdriver-wrench"></i> Admin Release Management</a>
+            <a href="#copyright"><i class="fa-solid fa-fingerprint"></i> Copyright Scanner</a>
+            <a href="#royalties"><i class="fa-solid fa-coins"></i> Royalties &amp; CSV Import</a>
+            <a href="#earnings"><i class="fa-solid fa-sack-dollar"></i> Earnings &amp; Approvals</a>
+            <a href="#withdrawals"><i class="fa-solid fa-wallet"></i> Withdrawals</a>
+            <a href="#stats"><i class="fa-solid fa-chart-area"></i> Streaming Stats</a>
+            <a href="#payments"><i class="fa-solid fa-credit-card"></i> Payment Gateways</a>
+            <a href="#emails"><i class="fa-solid fa-envelope"></i> Email Notifications</a>
+            <a href="#homepage"><i class="fa-solid fa-pen-square"></i> Homepage Content</a>
+            <a href="#license"><i class="fa-solid fa-key"></i> Licensing</a>
+            <a href="#settings"><i class="fa-solid fa-sliders"></i> Admin Settings</a>
+
+            <div class="sidebar-section">Support</div>
+            <a href="#faq"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+            <a href="#support"><i class="fa-solid fa-headset"></i> Get Support</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+
+            <!-- Hero -->
+            <div class="page-hero">
+                <h1><i class="fa-solid fa-music"></i> Distro Supawave Documentation</h1>
+                <p>White-Label Music Distribution Platform - Built with Laravel 12</p>
+                <div class="meta">
+                    <span><i class="fa-solid fa-tag"></i> Version 1.1.0</span>
+                    <span><i class="fa-brands fa-laravel"></i> Laravel 12</span>
+                    <span><i class="fa-brands fa-php"></i> PHP 8.2+</span>
+                    <span><i class="fa-solid fa-calendar"></i> September 2026</span>
+                </div>
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h3><i class="fa-solid fa-list"></i> Table of Contents</h3>
+                <ol>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#requirements">Server Requirements</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#configuration">Configuration</a></li>
+                    <li><a href="#roles">User Roles</a></li>
+                    <li><a href="#releases">Release Upload</a></li>
+                    <li><a href="#admin-releases">Admin Release Management</a></li>
+                    <li><a href="#copyright">Copyright Scanner</a></li>
+                    <li><a href="#royalties">Royalties &amp; CSV Import</a></li>
+                    <li><a href="#earnings">Earnings &amp; Approvals</a></li>
+                    <li><a href="#withdrawals">Withdrawals</a></li>
+                    <li><a href="#stats">Streaming Stats</a></li>
+                    <li><a href="#payments">Payment Gateways</a></li>
+                    <li><a href="#emails">Email Notifications</a></li>
+                    <li><a href="#homepage">Homepage Content</a></li>
+                    <li><a href="#license">Licensing</a></li>
+                    <li><a href="#settings">Admin Settings</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#support">Get Support</a></li>
+                </ol>
+            </div>
+
+            <!-- Introduction -->
+            <div class="section" id="introduction">
+                <h2><i class="fa-solid fa-house"></i> Introduction</h2>
+                <p>Thank you for purchasing <strong>Distro Supawave</strong>. This documentation will guide you through
+                    installing, configuring, and using the platform. Please read through this document fully before
+                    starting the installation.</p>
+
+                <p>Distro Supawave is a white-label music distribution platform that allows you to run your own
+                    distribution
+                    service. Artists and labels submit their releases through your platform. You review and approve
+                    them, download the metadata package, and manually push to your chosen distributor (CDBaby,
+                    Symphonic, DistroKid, etc.). Royalties are imported back via CSV and distributed to artists through
+                    an earnings approval workflow.</p>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div><strong>Live Demo:</strong> Visit <a href="https://distrosupawave.hadegoldmedia.com"
+                            target="_blank">distrosupawave.hadegoldmedia.com</a> to see the platform in action before
+                        installation.</div>
+                </div>
+
+                <h3>What Is Included</h3>
+                <ul>
+                    <li>Full Laravel 12 source code</li>
+                    <li>All migrations and seeders</li>
+                    <li>This documentation (HTML)</li>
+                    <li><code>.env.example</code> configuration file</li>
+                    <li>All compiled frontend assets</li>
+                    <li>Automated copyright scanner (ACRCloud) </li>
+                </ul>
+
+                <div class="alert alert-warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Note:</strong> The <code>vendor</code> folder is included in the package. You can also
+                        run <code>composer install</code> after uploading the files. See the installation section for
+                        full instructions.</div>
+                </div>
+            </div>
+
+            <!-- Requirements -->
+            <div class="section" id="requirements">
+                <h2><i class="fa-solid fa-list-check"></i> Server Requirements</h2>
+                <p>Before installing Distro Supawave, make sure your server meets the following requirements:</p>
+
+                <div class="requirement-grid">
+                    <div class="req-card">
+                        <h4><i class="fa-brands fa-php"></i> PHP &amp; Extensions</h4>
+                        <ul>
+                            <li>PHP <strong>8.2 or higher</strong></li>
+                            <li>BCMath Extension</li>
+                            <li>Ctype Extension</li>
+                            <li>cURL Extension</li>
+                            <li>DOM Extension</li>
+                            <li>Fileinfo Extension</li>
+                            <li>JSON Extension</li>
+                            <li>Mbstring Extension</li>
+                            <li>OpenSSL Extension</li>
+                            <li>PDO Extension</li>
+                            <li>PDO MySQL Extension</li>
+                            <li>Tokenizer Extension</li>
+                            <li>XML Extension</li>
+                            <li>ZipArchive Extension</li>
+                        </ul>
+                    </div>
+                    <div class="req-card">
+                        <h4><i class="fa-solid fa-server"></i> Server &amp; Database</h4>
+                        <ul>
+                            <li>MySQL <strong>5.7+</strong> or MariaDB <strong>10.3+</strong></li>
+                            <li>Apache or Nginx web server</li>
+                            <li>Composer <strong>2.0+</strong></li>
+                            <li>mod_rewrite enabled (Apache)</li>
+                            <li>Minimum <strong>512MB</strong> RAM</li>
+                            <li>Minimum <strong>500MB</strong> disk space</li>
+                        </ul>
+                        <h4 style="margin-top:12px;"><i class="fa-solid fa-folder-open"></i> Folder Permissions</h4>
+                        <ul>
+                            <li><code>storage/</code> - writable (755)</li>
+                            <li><code>bootstrap/cache/</code> - writable (755)</li>
+                            <li><code>public/uploads/</code> - writable (755)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div>Distro Supawave is compatible with <strong>shared hosting</strong> (cPanel), VPS, and dedicated
+                        servers. No special server configuration is required beyond the requirements above.</div>
+                </div>
+            </div>
+
+            <!-- Installation -->
+            <div class="section" id="installation">
+                <h2><i class="fa-solid fa-download"></i> Installation</h2>
+                <p>Distro Supawave includes a <strong>web installer</strong> that handles the entire setup
+                    process for
+                    you. Follow these steps carefully.</p>
+
+                <h3>Step 1 - Upload Files</h3>
+                <ol>
+                    <li>Download and extract the package ZIP</li>
+                    <li>Extract the ZIP on your server</li>
+                    <li>Move/Copy all extracted files to your server's <strong>public_html</strong> folder (or your
+                        domain's root folder)</li>
+                    <li>You can use FTP (FileZilla), cPanel File Manager, or SSH</li>
+                </ol>
+
+                <div class="alert alert-warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>Make sure you upload the <strong>contents</strong> of the folder, not the folder itself. The
+                        file must be directly inside <code>public_html</code>.</div>
+                </div>
+
+                <h3>Step 2 - Run Composer Install</h3>
+                <p>The <code>vendor</code> folder is included. You can install dependencies via Composer before running
+                    the installer.</p>
+
+                <p><strong>Via SSH (recommended):</strong></p>
+                <pre><code>cd /path/to/your/public_html
+composer install --optimize-autoloader --no-dev</code></pre>
+
+                <p><strong>Via cPanel Terminal:</strong><br>
+                    Go to <strong>cPanel → Terminal</strong>, navigate to your folder and run the same command above.
+                </p>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>If your host does not allow SSH, follow Step 1.</div>
+                </div>
+
+                <h3>Step 3 - Run the Web Installer</h3>
+                <p>Once files are uploaded and Composer has run when necessary, visit your domain in a browser.</p>
+                <pre><code>https://yourdomain.com/install</code></pre>
+
+                <p>The installer has <strong>4 steps</strong>:</p>
+
+                <ol class="step-list">
+                    <li>
+                        <div class="step-content">
+                            <strong>Requirements Check</strong>
+                            The installer checks that all required PHP extensions are enabled and that storage folders
+                            are writable. All items must show a green checkmark before proceeding. If anything fails,
+                            contact your hosting provider.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-content">
+                            <strong>Database Configuration</strong>
+                            Enter your database credentials - host (usually <code>localhost</code>), database
+                            name, username, and password. Click <strong>Test Connection</strong> to verify before
+                            proceeding.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-content">
+                            <strong>Site &amp; Email Settings</strong>
+                            Enter your site name, and support email and SMTP email settings. The site URL must match
+                            your actual domain exactly (e.g. <code>https://yourdomain.com</code>).
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="step-content">
+                            <strong>Admin Account</strong>
+                            Create your administrator account. Enter your name, email address, and a strong password.
+                            This will be the main admin login.
+                        </div>
+                    </li>
+                    
+
+                    <li>
+                        <div class="step-content">
+                            <strong>Complete</strong>
+                            Installation is complete.
+                        </div>
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div><strong>Installation complete!</strong> Log in at <code>yourdomain.com/admin/login</code> with
+                        the credentials you created in Step 5.</div>
+                </div>
+
+                <h3>cPanel / Shared Hosting (Document Root Fix)</h3>
+                <p>Laravel serves everything from the <code>public/</code> folder. On cPanel, set the domain&rsquo;s
+                    <strong>document root</strong> to your project&rsquo;s <code>public</code> directory:
+                </p>
+                <pre><code>Document root: /home/yourusername/yourdomain.com/public</code></pre>
+                <p>In cPanel: <strong>Domains &rarr; Manage (your domain) &rarr; Document Root</strong> and point it at
+                    the <code>public</code> folder.</p>
+
+                <div class="alert alert-warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>If you cannot change the document root</strong> (most shared hosts / LiteSpeed), the
+                        package includes <strong>two <code>.htaccess</code> files</strong> that make everything work
+                        automatically. Upload <strong>both</strong> files — the root one forwards every request into
+                        <code>public/</code>, and <code>public/.htaccess</code> serves real files (styles, images,
+                        compiled assets) and routes everything else to <code>public/index.php</code>.
+                    </div>
+                </div>
+
+                <h4>1. Root <code>.htaccess</code> (project root, next to <code>artisan</code>)</h4>
+                <pre><code>&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+
+# Redirect www → non-www (preserve HTTPS)
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+&lt;/IfModule&gt;
+
+&lt;IfModule mod_rewrite.c&gt;
+    &lt;IfModule mod_negotiation.c&gt;
+        Options -MultiViews -Indexes
+    &lt;/IfModule&gt;
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Forward every request into public/ (public/.htaccess then serves real
+    # files and routes the rest to public/index.php). The !^/public/ guard
+    # prevents a rewrite loop.
+    RewriteCond %{REQUEST_URI} !^/public/ [NC]
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+&lt;/IfModule&gt;</code></pre>
+
+                <h4>2. <code>public/.htaccess</code> (inside the <code>public/</code> folder)</h4>
+                <pre><code>&lt;IfModule mod_rewrite.c&gt;
+    &lt;IfModule mod_negotiation.c&gt;
+        Options -MultiViews -Indexes
+    &lt;/IfModule&gt;
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Serve existing files or directories directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Send all other requests to the Laravel front controller
+    RewriteRule ^ index.php [L]
+&lt;/IfModule&gt;</code></pre>
+
+                <div class="alert alert-danger">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <div><strong>Important:</strong> upload <strong>both</strong> files. If only the root
+                        <code>.htaccess</code> is present, the site loads but styles/images work while app pages (login,
+                        dashboard) return 404. If <code>public/.htaccess</code> is missing its front-controller rule,
+                        non-asset pages 404. After uploading, run <code>php artisan optimize:clear</code> and reload.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuration -->
+            <div class="section" id="configuration">
+                <h2><i class="fa-solid fa-gear"></i> Configuration</h2>
+
+                <h3>After Installation Checklist</h3>
+                <ol>
+                    <li>Log in to admin panel at <code>/admin/login</code></li>
+                    <li>Go to <strong>Settings → General</strong> and upload your logo and favicon</li>
+                    <li>Go to <strong>Website → Homepage Content</strong> and customise the landing page</li>
+                    <li>Go to <strong>Settings → Payment</strong> and configure your payment gateway credentials (see <a
+                            href="#payments">Payment Gateways</a>)</li>
+                    <li>Go to <strong>Settings → Payment</strong> to review the <strong>ACRCloud copyright
+                            scanner</strong> status and add your ACR keys (see <a href="#copyright">Copyright
+                            Scanner</a>)</li>
+                    <li>Go to <strong>Settings → General</strong> and configure your contact email</li>
+                    <li>Go to <strong>Pricing</strong> and create your subscription plans</li>
+                    <li>Go to <strong>Settings → Terms</strong> and upload your Terms &amp; Conditions PDF</li>
+                    <li>Go to <strong>Settings → Privacy Policy</strong> and write your privacy policy</li>
+                </ol>
+
+                <h3>SMTP Email Configuration</h3>
+                <p>Distro Supawave sends email notifications for release approvals, earnings, and withdrawals. Configure
+                    SMTP
+                    during installation or update the following values in your <code>.env</code> file:</p>
+
+                <pre><code>MAIL_MAILER=smtp
+MAIL_HOST=smtp.your-provider.com
+MAIL_PORT=587
+MAIL_USERNAME=your@email.com
+MAIL_PASSWORD=yourpassword
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@yourdomain.com
+MAIL_FROM_NAME="Your Platform Name"</code></pre>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>Popular SMTP providers: <strong>Mailgun</strong>, <strong>SendGrid</strong>, <strong>Amazon
+                            SES</strong>, <strong>Gmail SMTP</strong>. For production, avoid using Gmail SMTP as it has
+                        sending limits.</div>
+                </div>
+
+                <h3>File Upload Configuration</h3>
+                <p>For large audio file uploads (WAV files can be 100MB+), make sure your server's PHP limits are
+                    configured. Add or update these in your <code>php.ini</code> or <code>.htaccess</code>:</p>
+
+                <pre><code>upload_max_filesize = 200M
+post_max_size = 200M
+max_execution_time = 300
+memory_limit = 256M</code></pre>
+
+                <p>Or via <code>.htaccess</code>:</p>
+                <pre><code>php_value upload_max_filesize 200M
+php_value post_max_size 200M
+php_value max_execution_time 300
+php_value memory_limit 256M</code></pre>
+
+                <p>If you use Nginx, also raise <code>client_max_body_size</code> to match (e.g.
+                    <code>client_max_body_size 200M;</code>). Audio is uploaded in 2MB chunks, but the limit should
+                    still comfortably exceed a single chunk.
+                </p>
+            </div>
+
+            <!-- User Roles -->
+            <div class="section" id="roles">
+                <h2><i class="fa-solid fa-users"></i> User Roles</h2>
+                <p>Distro Supawave has three distinct roles:</p>
+
+                <table>
+                    <tr>
+                        <th>Role</th>
+                        <th>Description</th>
+                        <th>Access</th>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-purple">Admin</span></td>
+                        <td>Platform owner/operator. Separate login at <code>/admin/login</code></td>
+                        <td>Full platform access - users, releases, royalties, settings, analytics</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-green">Artist</span></td>
+                        <td>Independent musician who uploads their own music</td>
+                        <td>Upload releases, view streaming stats, request withdrawals</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-orange">Label</span></td>
+                        <td>Record label that manages multiple artists</td>
+                        <td>Upload music for multiple artists, manage roster, view all stats</td>
+                    </tr>
+                </table>
+
+                <h3>Artist Profile Requirement</h3>
+                <p>Before an artist can upload a release, they must complete their artist profile. The required fields
+                    are:</p>
+                <ul>
+                    <li>Artist name</li>
+                    <li>Audiomack profile link</li>
+                    <li>Spotify profile link</li>
+                    <li>Apple Music profile link</li>
+                    <li>Instagram handle</li>
+                    <li>TikTok handle</li>
+                </ul>
+                <p>If the profile is incomplete, the upload button is disabled and a message guides the artist to
+                    complete their profile first.</p>
+            </div>
+
+            <!-- Release Upload -->
+            <div class="section" id="releases">
+                <h2><i class="fa-solid fa-compact-disc"></i> Release Upload (Artist/Label)</h2>
+
+                <h3>Supported Release Types</h3>
+                <ul>
+                    <li><strong>Single</strong> - 1 track</li>
+                    <li><strong>EP</strong> - 2 to 6 tracks</li>
+                    <li><strong>Album</strong> - 7 or more tracks</li>
+                </ul>
+
+                <h3>Upload Process</h3>
+                <ol>
+                    <li>Go to <strong>Upload Music</strong> from the user dashboard</li>
+                    <li>Select release type (Single, EP, or Album)</li>
+                    <li>Upload cover art - must be <strong>3000×3000px</strong> minimum, JPEG or PNG</li>
+                    <li>Fill in release details - title, genre, release date, label name, explicit flag</li>
+                    <li>Upload audio tracks - WAV (preferred) or high-quality MP3</li>
+                    <li>Fill in track details - title, featured artists, producers, ISRC (if known)</li>
+                    <li>Submit for review</li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div><strong>Release Date:</strong> Release dates must be at least 14 days in the future to give
+                        enough time for distribution processing.</div>
+                </div>
+
+                <h3>Audio Upload</h3>
+                <p>Distro Supawave uses <strong>chunked uploading</strong> for audio files. Large files (100MB+ WAV
+                    files)
+                    are split into 2MB chunks and uploaded progressively. This means large files work even on shared
+                    hosting with standard PHP upload limits. A progress bar shows the upload status for each track, and
+                    any upload errors are surfaced clearly in the interface.</p>
+
+                <div class="alert alert-warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Automatic copyright scan:</strong> every uploaded master is fingerprinted by the <a
+                            href="#copyright">copyright scanner</a> immediately after the upload finishes. If a match is
+                        found, the track is marked blocked and flagged for your review.</div>
+                </div>
+            </div>
+
+            <!-- Admin Release Management -->
+            <div class="section" id="admin-releases">
+                <h2><i class="fa-solid fa-screwdriver-wrench"></i> Admin Release Management</h2>
+
+                <h3>Release Queue</h3>
+                <p>All submitted releases appear in the admin panel under <strong>Music → All Releases</strong>.
+                    Releases are filterable by status:</p>
+                <ul>
+                    <li><span class="badge badge-orange">Pending</span> - Awaiting admin review</li>
+                    <li><span class="badge badge-green">Approved</span> - Approved for distribution</li>
+                    <li><span class="badge badge-red">Rejected</span> - Returned to artist with reason</li>
+                </ul>
+
+                <h3>Copyright Column</h3>
+                <p>Every row also shows a <strong>Copyright</strong> column with the scan result for that release:</p>
+                <ul>
+                    <li><span class="badge badge-pink">Flagged</span> - A track matched a copyrighted work; the
+                        matched title &amp; artist are shown. Reject the release or investigate before approving.</li>
+                    <li><span class="badge badge-green">Clear</span> - Every track was scanned and no match was
+                        found.</li>
+                    <li><span class="badge badge-blue">Not scanned</span> - The track has not been scanned yet
+                        (scanner disabled or still processing).</li>
+                    <li><span class="badge badge-red">Scan failed</span> - The scan could not complete (e.g. file
+                        rejected as too large, no fingerprint). Check the copyright scan records.</li>
+                </ul>
+                <p>See the <a href="#copyright">Copyright Scanner</a> section for configuration.</p>
+
+                <h3>Approving a Release</h3>
+                <ol>
+                    <li>Click on a pending release to view full details</li>
+                    <li>Review the cover art, tracks, metadata, and artist information</li>
+                    <li>Click <strong>Approve</strong> - the artist is notified by email automatically</li>
+                    <li>Download the release ZIP (audio + cover + metadata JSON/CSV/PDF)</li>
+                    <li>Upload the ZIP package to your chosen distributor (CDBaby, Symphonic, etc.)</li>
+                </ol>
+
+                <h3>Metadata ZIP Contents</h3>
+                <table>
+                    <tr>
+                        <th>File</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>metadata.json</code></td>
+                        <td>Full release and track metadata including ISRC, UPC, artist streaming links</td>
+                    </tr>
+                    <tr>
+                        <td><code>metadata.csv</code></td>
+                        <td>Flat CSV format for easy import into distributor tools</td>
+                    </tr>
+                    <tr>
+                        <td><code>metadata.pdf</code></td>
+                        <td>Printable PDF summary of the release</td>
+                    </tr>
+                    <tr>
+                        <td>Audio files</td>
+                        <td>Original uploaded WAV/MP3 files per track</td>
+                    </tr>
+                    <tr>
+                        <td>Cover art</td>
+                        <td>Original uploaded cover image</td>
+                    </tr>
+                </table>
+
+                <h3>Editing Metadata</h3>
+                <p>Admin can edit any release's metadata after approval - go to the release detail page and click
+                    <strong>Edit Metadata</strong>. You can update title, ISRC codes, UPC, credits, and more. Useful for
+                    correcting errors before pushing to a distributor.
+                </p>
+            </div>
+
+            <!-- Copyright Scanner -->
+            <div class="section" id="copyright">
+                <h2><i class="fa-solid fa-fingerprint"></i> Copyright Scanner (ACRCloud)</h2>
+
+                <p>To prevent users from uploading copyrighted tracks (which could lead to takedowns and platform bans),
+                    Distro Supawave fingerprints every uploaded master audio file through the <strong>ACRCloud</strong>
+                    audio
+                    recognition API before it is permanently stored.</p>
+
+                <h3>How It Works</h3>
+                <ol>
+                    <li>An artist uploads a track - the audio is chunked and stitched into a master file</li>
+                    <li>Distro Supawave extracts a short ~15 second snippet (no FFmpeg required) and sends it to
+                        ACRCloud
+                    </li>
+                    <li>ACRCloud fingerprints the snippet and matches it against a library of commercial recordings</li>
+                    <li>If a match is found, the track is marked <strong>blocked</strong> and the release shows a
+                        <strong>Flagged</strong> badge in the admin queue
+                    </li>
+                    <li>The uploader&rsquo;s account is also flagged for review</li>
+                </ol>
+
+                <h3>Configuration</h3>
+                <p>ACRCloud provides a <strong>free developer tier (100 identifications per month)</strong>. To enable
+                    the scanner:</p>
+                <ol>
+                    <li>Create a free project at <a href="https://console.acrcloud.com"
+                            target="_blank">console.acrcloud.com</a></li>
+                    <li>Copy your project&rsquo;s <strong>Access Key</strong>, <strong>Access Secret</strong>, and
+                        <strong>Host</strong> (shown in the ACRCloud console)
+                    </li>
+                    <li>Add them to your <code>.env</code> file:</li>
+                </ol>
+
+                <pre><code>ACR_PROJECT_KEY=your_access_key
+ACR_PROJECT_SECRET=your_access_secret
+ACR_HOST=https://identify-eu-west-1.acrcloud.com</code></pre>
+
+                <p>Use the exact host from your ACRCloud project console (e.g.
+                    <code>identify-eu-west-1.acrcloud.com</code>, <code>identify-ap-southeast-1.acrcloud.com</code>).
+                    Then reload the app.
+                </p>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>The admin <strong>Settings → Payment</strong> page shows a live <strong>ACRCloud Copyright
+                            Scanner</strong> status card (Enabled / Disabled) with the exact keys you need to add.
+                        Scanning runs automatically on every upload - no per-track action is required.</div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Note:</strong> ACRCloud is a recognition API - it does not store or list the
+                        files you upload. If you want to match your <em>own</em> catalogue, add your tracks to the
+                        project&rsquo;s <strong>Custom Music DB</strong> in the ACRCloud console.</div>
+                </div>
+            </div>
+
+            <!-- Royalties -->
+            <div class="section" id="royalties">
+                <h2><i class="fa-solid fa-coins"></i> Royalties &amp; CSV Import</h2>
+
+                <p>When your distributor sends you a royalty report (usually monthly), you upload it to Distro Supawave.
+                    The
+                    platform parses the CSV, matches tracks to the correct artists, and creates earnings records for
+                    each artist.</p>
+
+                <h3>Supported CSV Formats</h3>
+                <ul>
+                    <li><strong>Soundrop</strong> - select "Soundrop" format when uploading</li>
+                    <li><strong>Auto-detect</strong> - select "Auto" and the system will detect column headers
+                        automatically. This works with most major distributor CSV formats.</li>
+                </ul>
+
+                <h3>How to Import a Royalty Report</h3>
+                <ol>
+                    <li>Go to <strong>Royalties → Reports</strong> in the admin panel</li>
+                    <li>Click <strong>Upload CSV Report</strong></li>
+                    <li>Select the distributor format (Soundrop or Auto)</li>
+                    <li>Select your CSV file and click Upload</li>
+                    <li>The system processes each row, matches artists by name, and creates earnings records</li>
+                    <li>Any unmatched artists are shown in the success message so you can investigate</li>
+                </ol>
+
+                <div class="alert alert-warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Duplicate Prevention:</strong> Each CSV file is hashed on upload. Uploading the same
+                        file twice will be detected and rejected automatically.</div>
+                </div>
+
+                <h3>Artist Matching</h3>
+                <p>The system matches CSV rows to artists using this priority order:</p>
+                <ol>
+                    <li>ISRC code (most accurate)</li>
+                    <li>UPC code</li>
+                    <li>Track title + artist name (fuzzy match)</li>
+                </ol>
+                <p>If no match is found, the row is skipped and the artist name is shown in the unmatched list.</p>
+            </div>
+
+            <!-- Earnings -->
+            <div class="section" id="earnings">
+                <h2><i class="fa-solid fa-sack-dollar"></i> Earnings &amp; Approvals</h2>
+
+                <p>After importing a CSV, all earnings are created with a <strong>Pending</strong> status. The admin
+                    must approve earnings before they are credited to an artist's wallet.</p>
+
+                <h3>Approving Earnings</h3>
+                <ol>
+                    <li>Go to <strong>Royalties → Earnings Report</strong></li>
+                    <li>Review pending earnings - each row shows artist, track, month, and amount</li>
+                    <li>Click <strong>Approve</strong> on individual earnings, or use <strong>Mass Approve</strong> to
+                        approve all selected</li>
+                    <li>Approved earnings are immediately added to the artist's wallet balance</li>
+                    <li>The artist can now request a withdrawal</li>
+                </ol>
+
+                <h3>Exporting Earnings Reports</h3>
+                <p>You can export a monthly earnings CSV for any artist:</p>
+                <ol>
+                    <li>Go to <strong>Royalties → Stream Reports</strong></li>
+                    <li>Filter by artist, year, and month</li>
+                    <li>Click <strong>Export CSV</strong> to download, or <strong>Send to Artist</strong> to email the
+                        report directly</li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>Only <strong>approved</strong> earnings are included in exported reports. Pending or rejected
+                        earnings are excluded.</div>
+                </div>
+            </div>
+
+            <!-- Withdrawals -->
+            <div class="section" id="withdrawals">
+                <h2><i class="fa-solid fa-wallet"></i> Withdrawals</h2>
+
+                <h3>Artist Withdrawal Request</h3>
+                <p>Artists can request a withdrawal once they have approved earnings in their wallet. They go to the
+                    <strong>Wallet</strong> page, enter the amount, and select a payout method:
+                </p>
+                <ul>
+                    <li>PayPal (enter PayPal email)</li>
+                    <li>Bank Transfer (enter bank account details)</li>
+                    <li>Cryptocurrency (enter wallet address)</li>
+                </ul>
+
+                <h3>Admin Processing Withdrawals</h3>
+                <ol>
+                    <li>Go to <strong>Withdrawals → Pending</strong></li>
+                    <li>Review the request - artist name, amount, and payout method are shown</li>
+                    <li>Process the payment manually through your payment provider</li>
+                    <li>Click <strong>Approve</strong> - the artist is notified by email</li>
+                    <li>Or click <strong>Reject</strong> with a reason - the amount is returned to the artist's
+                        wallet</li>
+                </ol>
+
+                <div class="alert alert-warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>Distro Supawave does <strong>not</strong> process withdrawals automatically. You must manually
+                        send
+                        the payment to the artist through PayPal, your bank, or your crypto exchange, then mark it as
+                        approved in the platform.</div>
+                </div>
+            </div>
+
+            <!-- Streaming Stats -->
+            <div class="section" id="stats">
+                <h2><i class="fa-solid fa-chart-area"></i> Streaming Stats</h2>
+
+                <p>Streaming stats are populated from the royalty CSV imports. Artists can view their stats from the
+                    <strong>Streaming Stats</strong> page in the user dashboard.
+                </p>
+
+                <h3>Stats Flow</h3>
+                <ol>
+                    <li>Artist visits <strong>Streaming Stats</strong> - sees all their releases listed with total
+                        streams</li>
+                    <li>Clicks <strong>View Stats</strong> on a release - sees all tracks in that release</li>
+                    <li>Clicks <strong>Details</strong> on a track - sees full breakdown: store-by-store streams,
+                        top countries, monthly trend chart</li>
+                </ol>
+
+                <h3>Manual Stream Entry (Admin)</h3>
+                <p>Admin can also manually add streaming data without uploading a CSV - useful for adding streams
+                    from a distributor that does not provide CSV reports. Go to <strong>Analytics → Manual Stream
+                        Entry</strong>, select the track, month, year, and enter streams per store.</p>
+
+                <h3>Available Filters</h3>
+                <ul>
+                    <li>Date range - Last 30 Days, Last 3 Months, Last 6 Months, Last 12 Months, This Year, All
+                        Time</li>
+                    <li>Store - filter by individual streaming platform</li>
+                </ul>
+            </div>
+
+            <!-- Payments -->
+            <div class="section" id="payments">
+                <h2><i class="fa-solid fa-credit-card"></i> Payment Gateways</h2>
+                <p>Distro Supawave supports several payment gateways for subscription payments. Configure them in
+                    <strong>Settings → Payment</strong>. Each gateway has an enable/disable toggle and a sandbox/live
+                    mode.
+                </p>
+
+                <table>
+                    <tr>
+                        <th>Gateway</th>
+                        <th>Best For</th>
+                        <th>Keys Needed</th>
+                    </tr>
+                    <tr>
+                        <td><strong>PayPal</strong></td>
+                        <td>Global - most countries</td>
+                        <td>Client ID, Client Secret, Webhook ID</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paystack</strong></td>
+                        <td>Africa - Nigeria, Ghana, Kenya, South Africa</td>
+                        <td>Public Key, Secret Key</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CoinPayments</strong></td>
+                        <td>Cryptocurrency payments</td>
+                        <td>Merchant ID, Public Key, Private Key, IPN Secret</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NowPayments</strong></td>
+                        <td>Cryptocurrency payments</td>
+                        <td>API Key, IPN Secret</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MoneyUnify</strong></td>
+                        <td>Africa - mobile money (M-Pesa, etc.)</td>
+                        <td>API credentials</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Manual</strong></td>
+                        <td>Bank transfer / manual instructions</td>
+                        <td>Instructions text</td>
+                    </tr>
+                </table>
+
+                <h3>Getting Your API Keys</h3>
+                <ul>
+                    <li><strong>PayPal:</strong> <a href="https://developer.paypal.com/dashboard"
+                            target="_blank">developer.paypal.com/dashboard</a></li>
+                    <li><strong>Paystack:</strong> <a href="https://dashboard.paystack.com/#/settings/developer"
+                            target="_blank">dashboard.paystack.com</a></li>
+                    <li><strong>CoinPayments:</strong> <a
+                            href="https://www.coinpayments.net/index.php?cmd=acct_settings"
+                            target="_blank">coinpayments.net</a></li>
+                    <li><strong>NowPayments:</strong> <a href="https://account.nowpayments.io"
+                            target="_blank">account.nowpayments.io</a></li>
+                </ul>
+
+                <h3>NowPayments — IPN Secret (required)</h3>
+                <p>The NowPayments <strong>IPN Secret</strong> is used to verify every payment callback. It is
+                    <strong>required</strong> — without it, the application rejects callbacks and successful payments will
+                    <strong>not</strong> activate the subscription.</p>
+                <ol>
+                    <li>Log in to <a href="https://account.nowpayments.io" target="_blank">account.nowpayments.io</a> and
+                        go to <strong>Settings → Account</strong>.</li>
+                    <li>Copy your <strong>IPN Secret</strong> (also called the callback/notification secret). If none is
+                        shown, create a random secret (e.g. a 32-character string).</li>
+                    <li>Set your <strong>IPN callback URL</strong> to <code>https://yourdomain.com/webhook/nowpayments</code>.
+                    </li>
+                    <li>Paste the secret into <strong>Settings → Payment → NowPayments → IPN Secret</strong> in the admin
+                        panel and save.</li>
+                    <li>Copy the <strong>API Key</strong> from NowPayments and enter it in the <strong>API Key</strong>
+                        field.</li>
+                </ol>
+
+                <h3>PayPal — Webhook Setup (required)</h3>
+                <p>In addition to the <strong>Client ID</strong> and <strong>Client Secret</strong>, PayPal requires a
+                    <strong>Webhook ID</strong> to verify webhook signatures. Payments cannot be confirmed without it.</p>
+                <ol>
+                    <li>Log in to <a href="https://developer.paypal.com/dashboard" target="_blank">developer.paypal.com</a>
+                        and open your <strong>App</strong>.</li>
+                    <li>Copy the <strong>Client ID</strong> and <strong>Client Secret</strong> (sandbox or live) and enter
+                        them under <strong>Settings → Payment → PayPal</strong>.</li>
+                    <li>Click <strong>Add Webhook</strong> (or Edit Webhook) and set the <strong>Webhook URL</strong> to
+                        <code>https://yourdomain.com/webhook/paypal</code>.</li>
+                    <li>Subscribe to the <strong>CHECKOUT.ORDER.APPROVED</strong> event (keep the default event
+                        subscriptions).</li>
+                    <li>After saving, copy the generated <strong>Webhook ID</strong> and paste it into the
+                        <strong>Webhook ID</strong> field in the admin payment settings.</li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>You can enable or disable individual gateways from the payment settings page. Only enabled
+                        gateways are shown to users at checkout.</div>
+                </div>
+            </div>
+
+            <!-- Emails -->
+            <div class="section" id="emails">
+                <h2><i class="fa-solid fa-envelope"></i> Email Notifications</h2>
+                <p>Distro Supawave sends the following automatic email notifications:</p>
+
+                <table>
+                    <tr>
+                        <th>Event</th>
+                        <th>Who Receives It</th>
+                    </tr>
+                    <tr>
+                        <td>Release submitted</td>
+                        <td>Artist (confirmation) + All admins (new release alert)</td>
+                    </tr>
+                    <tr>
+                        <td>Release approved</td>
+                        <td>Artist</td>
+                    </tr>
+                    <tr>
+                        <td>Release rejected</td>
+                        <td>Artist (with rejection reason)</td>
+                    </tr>
+                    <tr>
+                        <td>Withdrawal requested</td>
+                        <td>All admins</td>
+                    </tr>
+                    <tr>
+                        <td>Withdrawal approved</td>
+                        <td>Artist</td>
+                    </tr>
+                    <tr>
+                        <td>Withdrawal rejected</td>
+                        <td>Artist</td>
+                    </tr>
+                    <tr>
+                        <td>Earnings report</td>
+                        <td>Artist (CSV attached)</td>
+                    </tr>
+                </table>
+
+                <p>All emails use a master layout that pulls your site logo and name from settings automatically. To
+                    customise the email templates, edit the Blade files in <code>resources/views/emails/</code>.</p>
+            </div>
+
+            <!-- Homepage Content -->
+            <div class="section" id="homepage">
+                <h2><i class="fa-solid fa-pen-square"></i> Homepage Content (CMS)</h2>
+
+                <p>You can edit the entire landing page from the admin panel - no code changes required. Go to
+                    <strong>Website → Homepage Content</strong> in the admin sidebar.
+                </p>
+
+                <p>The editor is organised into tabbed sections, each with its own fields and image uploads:</p>
+
+                <table>
+                    <tr>
+                        <th>Section</th>
+                        <th>What You Can Edit</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Hero</strong></td>
+                        <td>Hero title, hero text, and hero image</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Features</strong></td>
+                        <td>Features title, description, and the feature items (icon, title, text). Rows with a title
+                            appear in the feature grid; all rows appear in the top band.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Labels</strong></td>
+                        <td>Labels section title, text, and image</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pricing</strong></td>
+                        <td>Pricing title and text (plans are managed under Subscription Management)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Artists</strong></td>
+                        <td>Featured artists - add/remove cards with name, genre, image thumbnail, and overlay
+                            color</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Call to Action</strong></td>
+                        <td>CTA title lines and text</td>
+                    </tr>
+                </table>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>Images are uploaded to <code>public/uploads/homepage/</code> automatically. The interface is
+                        fully responsive and works on mobile - on small screens the sections switch to a dropdown
+                        and repeaters stack vertically.</div>
+                </div>
+            </div>
+
+            <!-- License -->
+            <div class="section" id="license">
+                <h2><i class="fa-solid fa-key"></i> Licensing</h2>
+
+                <p>Distro Supawave is distributed as a <strong>fully standalone</strong> application. It does <strong>not</strong>
+                include any purchase-code or license verification - there is no license server, no phone-home,
+                no domain-locking, and no activation requirement. After installation the application runs entirely
+                on the buyer&rsquo;s own hosting with no external dependencies.</p>
+
+                <p>The 4-step web installer walks the buyer through requirements, database, environment, and admin
+                account creation only. No license or purchase-code step is involved.</p>
+            </div>
+
+            <!-- Settings -->
+            <div class="section" id="settings">
+                <h2><i class="fa-solid fa-sliders"></i> Admin Settings</h2>
+
+                <table>
+                    <tr>
+                        <th>Section</th>
+                        <th>What You Can Configure</th>
+                    </tr>
+                    <tr>
+                        <td><strong>General</strong></td>
+                        <td>Site name, logo, favicon, tagline, site URL, contact details, social links, SEO settings,
+                            robots.txt, HTTPS toggle, registration toggles</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Payment</strong></td>
+                        <td>Gateway keys, enable/disable toggles, and the ACRCloud copyright scanner status</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Currencies</strong></td>
+                        <td>Add, edit, and delete currencies with exchange rates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Terms</strong></td>
+                        <td>Upload Terms &amp; Conditions as a PDF file</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Privacy Policy</strong></td>
+                        <td>Write privacy policy using the built-in rich text editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cookie Policy</strong></td>
+                        <td>Write cookie policy using the built-in rich text editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Refund Policy</strong></td>
+                        <td>Write refund policy using the built-in rich text editor</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- FAQ -->
+            <div class="section" id="faq">
+                <h2><i class="fa-solid fa-circle-question"></i> Frequently Asked Questions</h2>
+
+                <h3>Does Distro Supawave automatically push music to Spotify or Apple Music?</h3>
+                <p>No. Distro Supawave is a management platform. You download the release package and manually upload it
+                    to
+                    your chosen distributor (CDBaby, Symphonic, DistroKid, etc.). This gives you full control over which
+                    distributor you use and keeps the platform lean and fast.</p>
+
+                <h3>Can I use my own distributor?</h3>
+                <p>Yes. Distro Supawave works with any distributor. The metadata export (JSON, CSV, PDF) is designed to
+                    be
+                    compatible with all major distributors.</p>
+
+                <h3>What CSV formats does the royalty importer support?</h3>
+                <p>Distro Supawave has a built-in Soundrop parser and a universal auto-detect parser that works with
+                    most
+                    distributor CSV formats by detecting column headers automatically.</p>
+
+                <h3>Can I run this on shared hosting?</h3>
+                <p>Yes. Distro Supawave is fully compatible with shared hosting (cPanel). The audio upload uses chunked
+                    uploading to work within standard PHP upload limits.</p>
+
+                <h3>Does Distro Supawave check for copyrighted uploads?</h3>
+                <p>Yes. Every upload is fingerprinted through ACRCloud (see <a href="#copyright">Copyright Scanner</a>).
+                    Matches are flagged in the admin release queue so you can reject them before they are distributed.
+                    ACRCloud offers a free tier of 100 identifications per month.</p>
+
+                <h3>Can I customise the landing page without editing code?</h3>
+                <p>Yes. Use <strong>Website → Homepage Content</strong> in the admin panel to edit all landing page
+                    text, images, features, pricing text, featured artists, and call-to-action (see <a
+                        href="#homepage">Homepage Content</a>).</p>
+
+                <h3>How do I update Distro Supawave when a new version is released?</h3>
+                <p>Download the new version from your marketplace/vendor, back up your current files and database, then overwrite the
+                    files (excluding <code>.env</code>) and run <code>php artisan migrate</code> via SSH or the cPanel
+                    terminal.</p>
+
+                <h3>Can I change the platform name and branding?</h3>
+                <p>Yes. Go to <strong>Settings → General</strong> to update the site name, logo, and favicon. All emails
+                    and pages will reflect your branding automatically.</p>
+
+                <h3>The installer is showing a requirements error. What do I do?</h3>
+                <p>Contact your hosting provider and ask them to enable the missing PHP extension. All required
+                    extensions are standard and available on most modern hosting plans.</p>
+
+                <h3>I uploaded a CSV but some artists were not matched. Why?</h3>
+                <p>The system matches CSV rows to artists by ISRC, UPC, or track title. If the artist name or track
+                    title in the CSV does not match exactly what is in the platform, the row will not match. Check the
+                    unmatched list shown after the import and ensure artist names and track titles match.</p>
+            </div>
+
+            <!-- Support -->
+            <div class="section" id="support">
+                <h2><i class="fa-solid fa-headset"></i> Get Support</h2>
+
+                <p>Before reaching out for support, please:</p>
+                <ol>
+                    <li>Read through this documentation fully</li>
+                    <li>Check the FAQ section above</li>
+                    <li>Check the <strong>item comments</strong> section - your question may already be
+                        answered</li>
+                </ol>
+
+                <h3>Support Channels</h3>
+                <table>
+                    <tr>
+                        <th>Channel</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-envelope" style="color:#6366f1;"></i> &nbsp; Email</td>
+                        <td><a href="mailto:support@hadegoldmedia.com">support@hadegoldmedia.com</a></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-comments" style="color:#6366f1;"></i> &nbsp; Item page</td>
+                        <td>Use the item comments or support tab on the marketplace item page</td>
+                    </tr>
+                </table>
+
+                <p><strong>Response time:</strong> We respond to all support requests within <strong>24&ndash;48
+                        hours</strong> on business days.</p>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>Support covers <strong>bugs and installation issues</strong> only. Customisation requests
+                        (adding new features, changing design) are not covered under item support but can be arranged as
+                        a paid service.</div>
+                </div>
+
+                <div class="credential-box">
+                    <h4><i class="fa-solid fa-globe"></i> &nbsp; Live Demo</h4>
+                    <div class="credential-row">
+                        <span class="credential-label">URL</span>
+                        <span class="credential-value">distrosupawave.hadegoldmedia.com</span>
+                    </div>
+                    <h4 style="margin-top:16px;"><i class="fa-solid fa-user-shield"></i> &nbsp; Admin Login</h4>
+                    <div class="credential-row">
+                        <span class="credential-label">Email</span>
+                        <span class="credential-value">admin@demo.com</span>
+                    </div>
+                    <div class="credential-row">
+                        <span class="credential-label">Password</span>
+                        <span class="credential-value">admin1234</span>
+                    </div>
+                    <h4 style="margin-top:16px;"><i class="fa-solid fa-microphone"></i> &nbsp; Artist Login</h4>
+                    <div class="credential-row">
+                        <span class="credential-label">Email</span>
+                        <span class="credential-value">artist@demo.com</span>
+                    </div>
+                    <div class="credential-row">
+                        <span class="credential-label">Password</span>
+                        <span class="credential-value">artist1234</span>
+                    </div>
+                    <h4 style="margin-top:16px;"><i class="fa-solid fa-building"></i> &nbsp; Label Login</h4>
+                    <div class="credential-row">
+                        <span class="credential-label">Email</span>
+                        <span class="credential-value">label@demo.com</span>
+                    </div>
+                    <div class="credential-row">
+                        <span class="credential-label">Password</span>
+                        <span class="credential-value">label1234</span>
+                    </div>
+                </div>
+
+                <br>
+                <p style="text-align:center; color:#94a3b8; font-size:13px;">
+                    &copy; 2026 <strong>Hadegold Media</strong> &nbsp;|&nbsp; Distro Supawave v1.1.0 &nbsp;|&nbsp;
+                    <a href="https://distrosupawave.hadegoldmedia.com" target="_blank">Live Demo</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Highlight active sidebar link on scroll
+        const sections = document.querySelectorAll('.section');
+        const links = document.querySelectorAll('.sidebar a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 80) {
+                    current = section.getAttribute('id');
+                }
+            });
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll
+        links.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

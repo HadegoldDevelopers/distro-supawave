@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distro Supawave - Music Distribution Platform (White Label Best) - Artists, Labels & Royalties | Live Preview
+    </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple: #A020F0;
+            --pink: #FF4F81;
+            --orange: #FF8C00;
+            --ink: #0f172a;
+            --muted: #64748b;
+            --line: #e2e8f0;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* Top demo bar */
+        .demobar {
+            background: #0f172a;
+            color: #94a3b8;
+            font-size: 13px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .demobar a {
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            padding: 7px 16px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .demobar a:hover {
+            opacity: .9;
+        }
+
+        .demobar .badge {
+            color: #a5f3fc;
+            background: rgba(34, 211, 238, .1);
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+        }
+
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--pink) 50%, var(--orange) 100%);
+            color: #fff;
+            padding: 70px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 620px;
+            margin: 0 auto 26px;
+            opacity: .95;
+        }
+
+        .hero .cta {
+            display: inline-block;
+            background: #fde047;
+            color: #111;
+            font-weight: 700;
+            padding: 14px 30px;
+            border-radius: 999px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+        }
+
+        .hero .cta:hover {
+            background: #facc15;
+        }
+
+        .hero .tags {
+            margin-top: 22px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero .tags span {
+            background: rgba(255, 255, 255, .15);
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 0;
+        }
+
+        section h2 {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        section .sub {
+            text-align: center;
+            color: var(--muted);
+            max-width: 560px;
+            margin: 0 auto 40px;
+        }
+
+        /* Feature grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 26px;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, .04);
+        }
+
+        .card .ico {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .bg-purple {
+            background: #f3e8ff;
+            color: #7e22ce;
+        }
+
+        .bg-pink {
+            background: #fce7f3;
+            color: #be185d;
+        }
+
+        .bg-blue {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .bg-green {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .bg-orange {
+            background: #ffedd5;
+            color: #c2410c;
+        }
+
+        .bg-indigo {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        /* Screenshot strip */
+        .shots {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .shot {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            background: #fff;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, .06);
+        }
+
+        .shot .ph {
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #818cf8;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .shot .cap {
+            padding: 14px 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Roles */
+        .roles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .role {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 26px;
+        }
+
+        .role .rname {
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .role ul {
+            padding-left: 18px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .role li {
+            margin-bottom: 6px;
+        }
+
+        .note {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 820px) {
+
+            .grid,
+            .roles {
+                grid-template-columns: 1fr;
+            }
+
+            .shots {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="demobar">
+        <div><span class="badge">LIVE PREVIEW</span> &nbsp;Distro Supawave &mdash; Music Distribution Platform</div>
+        <a href="https://distrosupawave.hadegoldmedia.com" target="_blank">Open Full Demo &rarr;</a>
+    </div>
+
+    <div class="hero">
+        <div class="wrap">
+            <h1>Run Your Own Music<br>Distribution Service</h1>
+            <p>Let artists and labels upload releases, push them to 100+ stores, track streaming royalties, and get paid
+                &mdash; all from one white-label Laravel platform.</p>
+            <a class="cta" href="https://distrosupawave.hadegoldmedia.com" target="_blank">Launch Live Demo</a>
+            <div class="tags">
+                <span>Laravel 12</span><span>Multi-Gateway Payments</span><span>Royalties</span>
+                <span>Copyright Scanner</span><span>Admin Panel</span>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="wrap">
+            <h2>Everything You Need to Distribute</h2>
+            <p class="sub">A complete, white-label music distribution system for independent artists, labels, and
+                distributors.</p>
+            <div class="grid">
+                <div class="card">
+                    <div class="ico bg-purple">🎵</div>
+                    <h3>Release Upload</h3>
+                    <p>Singles, EPs, and albums with chunked audio upload that handles 100MB+ WAV files even on shared
+                        hosting.</p>
+                </div>
+                <div class="card">
+                    <div class="ico bg-pink">💳</div>
+                    <h3>Payment Gateways</h3>
+                    <p>PayPal, Paystack, NowPayments, CoinPayments &amp; MoneyUnify with verified, secure webhooks.</p>
+                </div>
+                <div class="card">
+                    <div class="ico bg-green">💰</div>
+                    <h3>Royalties &amp; Earnings</h3>
+                    <p>Import distributor CSV reports, auto-match artists, approve earnings, and credit wallets.</p>
+                </div>
+                <div class="card">
+                    <div class="ico bg-blue">📊</div>
+                    <h3>Streaming Analytics</h3>
+                    <p>Detailed per-release and per-track streaming stats with platform and country breakdowns.</p>
+                </div>
+                <div class="card">
+                    <div class="ico bg-indigo">🛡️</div>
+                    <h3>Copyright Scanner</h3>
+                    <p>ACRCloud fingerprinting blocks copyrighted uploads before they reach your store.</p>
+                </div>
+                <div class="card">
+                    <div class="ico bg-orange">🏢</div>
+                    <h3>Admin Panel</h3>
+                    <p>Manage users, releases, royalties, withdrawals, pricing, homepage content, and settings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+        <div class="wrap">
+            <h2>Built for Artists &amp; Labels</h2>
+            <p class="sub">Three clean roles with exactly the right access.</p>
+            <div class="roles">
+                <div class="role">
+                    <div class="rname">🎤 Artist</div>
+                    <ul>
+                        <li>Upload singles, EPs &amp; albums</li>
+                        <li>Track streaming stats</li>
+                        <li>Request withdrawals</li>
+                    </ul>
+                </div>
+                <div class="role">
+                    <div class="rname">🏢 Label</div>
+                    <ul>
+                        <li>Manage a full artist roster</li>
+                        <li>Upload music for multiple artists</li>
+                        <li>View all label analytics</li>
+                    </ul>
+                </div>
+                <div class="role">
+                    <div class="rname">🛡️ Admin</div>
+                    <ul>
+                        <li>Approve / reject releases</li>
+                        <li>Import &amp; approve royalties</li>
+                        <li>Full platform control</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="wrap">
+            <h2>Inside the Dashboard</h2>
+            <div class="shots">
+                <div class="shot">
+                    <div class="ph"><img src="https://hadegoldmedia.com/distroimages/livepreview/artist_dashboard.png"
+                            style="width:100%;" alt="User Dashboard Screenshot"></div>
+                    <div class="cap">Artist Dashboard</div>
+                </div>
+                <div class="shot">
+                    <div class="ph"><img
+                            src="https://hadegoldmedia.com/distroimages/livepreview/artist_upload_releases.png"
+                            style="width:100%;" alt="Release Upload Screenshot"></div>
+                    <div class="cap">Release Upload Wizard</div>
+                </div>
+                <div class="shot">
+                    <div class="ph"><img src="https://hadegoldmedia.com/distroimages/livepreview/artist_analytics.png"
+                            style="width:100%;" alt="Streaming Stats Screenshot"></div>
+                    <div class="cap">Streaming Analytics</div>
+                </div>
+                <div class="shot">
+                    <div class="ph"><img src="https://hadegoldmedia.com/distroimages/livepreview/artist_royalties.png"
+                            style="width:100%;" alt="Royalties Screenshot"></div>
+                    <div class="cap">Royalties &amp; Earnings</div>
+                </div>
+            </div>
+            <p class="note"><em>Live preview note:</em> This is a static showcase for the CodeCanyon item page. The full
+                working demo is available at the button above.</p>
+        </div>
+    </section>
+
+</body>
+
+</html>
