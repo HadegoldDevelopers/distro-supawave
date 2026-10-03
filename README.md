@@ -2,7 +2,7 @@
 
 # 🎵 Distro Supawave
 
-**White-Label Music Distribution Platform for Artists & Labels**
+**White-Label Music Distribution Platform for Artists & Label (SaaS)s**
 
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-4F5B93)](https://www.php.net/)
 [![Laravel](https://img.shields.io/badge/Laravel-12-red)](https://laravel.com)
@@ -10,7 +10,7 @@
 [![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38bdf8)](https://tailwindcss.com)
 [![Alpine.js](https://img.shields.io/badge/Alpine.js-yes-2e3440)](https://alpinejs.dev)
 
-**Launch your own music distribution service in minutes.** Artists and labels upload releases, you review and approve them, export ready-to-deliver metadata packages, and push to any distributor (CDBaby, Symphonic, RouteNote, DistroKid, etc.). Royalties are imported via CSV and processed through an automated earnings, approval, and payout workflow.
+**Launch your own music distribution service in minutes.** **A full-stack music distribution platform inspired by tools like DistroKid.** Artists and labels upload releases, you review and approve them, export ready-to-deliver metadata packages, and push to any distributor (CDBaby, Symphonic, RouteNote, DistroKid, etc.). Royalties are imported via CSV and processed through an automated earnings, approval, and payout workflow.
 
 **[🚀 Live Demo](https://distrosupawave.hadegoldmedia.com)** &nbsp;·&nbsp; **[🛒 Buy on WPBay](https://wpbay.com/product/distro-supawave-white-label-music-distribution-platform-for-artists-labels/)** &nbsp;·&nbsp; **[📖 Documentation](docs/index.html)**
 
